@@ -29,39 +29,39 @@
 
 function findWordLadder(startWord, endWord, dictionary) {
   function WordLadder(word) {
-    this.prev = null;
-    this.word = word;
+    this.prev = null
+    this.word = word
     this.extendLadder = function(word) {
-      var result = new WordLadder(word);
-      result.prev = this;
-      return result;
+      var result = new WordLadder(word)
+      result.prev = this
+      return result
     };
     this.toArray = function() {
-      var result = [];
-      for (var curr = this; curr !== null; curr = curr.prev) result.push(curr.word);
-      var reversedArray = [];
-      for (var i = result.length-1; i >= 0; i--) reversedArray[result.length-i-1] = result[i];
-      return reversedArray;
+      var result = []
+      for (var curr = this; curr !== null; curr = curr.prev) result.push(curr.word)
+      var reversedArray = []
+      for (var i = result.length-1; i >= 0; i--) reversedArray[result.length-i-1] = result[i]
+      return reversedArray
     };
   }
-  var working = [ new WordLadder(startWord)];
-  var usedWords = {};
+  var working = [ new WordLadder(startWord)]
+  var usedWords = {}
   while (working.length !== 0) {
-    var ladder = working.shift();
-    if (usedWords[ladder.word] !== undefined) continue;
-    usedWords[ladder.word] = null;
+    var ladder = working.shift()
+    if (usedWords[ladder.word] !== undefined) continue
+    usedWords[ladder.word] = null
     if (ladder.word == endWord)
-    return ladder.toArray();
+    return ladder.toArray()
     // Find the next word
-    var successors = [];
+    var successors = []
     for (var i = 0; i <= ladder.word.length; ++i) {
       for (var ch = 'a'.charCodeAt(0); ch <= 'z'.charCodeAt(0); ++ch) {
-        var candidate = "";
-        for (var j = 0; j < i; j++) candidate += ladder.word[j];
-        candidate += String.fromCharCode(ch);
-        for (var k = i+1; k < ladder.word.length; k++) candidate += ladder.word[k];
+        var candidate = ""
+        for (var j = 0; j < i; j++) candidate += ladder.word[j]
+        candidate += String.fromCharCode(ch)
+        for (var k = i+1; k < ladder.word.length; k++) candidate += ladder.word[k]
         if (dictionary[candidate] !== undefined)
-          working[working.length] = ladder.extendLadder(candidate);
+          working[working.length] = ladder.extendLadder(candidate)
       }
     }
   }
@@ -109,8 +109,8 @@ var abbreviatedDictionary = {
   "homely": null,
   "comely": null,
   "comedy": null
-};
+}
 
-var result = findWordLadder('chance', 'comedy', abbreviatedDictionary);
+var result = findWordLadder('chance', 'comedy', abbreviatedDictionary)
 
-console.log(result);
+console.log(result)
