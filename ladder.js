@@ -22,8 +22,14 @@
 
    3. Afterward, please write a few thoughts about what you changed to make the code
       better:
+      
+      
 
-
+   4. Write unit tests for the findWordLadder() function and underlying WordLadder
+      class. These tests should exercise the code, validate that it actually returns
+      a valid word ladder, and validate that it responds appropriately to various
+      edge cases. If edge case issues are discovered in writing the tests then
+      fix them.
 
 */
 
