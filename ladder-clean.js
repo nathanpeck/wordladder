@@ -25,9 +25,9 @@ WordLadder.prototype.extendLadder = function(word) {
 WordLadder.prototype.toArray = function() {
   var result = [];
   for (var curr = this; curr !== null; curr = curr.prev) {
-    result.push(curr.word);
+    result.unshift(curr.word);
   }
-  return result.reverse();
+  return result;
 };
 
 // Given a word, find valid words that could be a bridge towards
@@ -44,8 +44,9 @@ function findSuccessors(givenWord, dictionary) {
                       String.fromCharCode(ch) +
                       givenWord.word.substring(i + 1);
       // See if the word we built is valid
-      if (dictionary[candidate] !== undefined)
+      if (dictionary[candidate] !== undefined) {
         successors.push(givenWord.extendLadder(candidate));
+      }
     }
   }
 
@@ -65,7 +66,7 @@ function findWordLadder(startWord, endWord, dictionary) {
     var ladder = working.shift();
 
     // Make sure that we don't get caught in an
-    // infinite loop or repeat words in a tree.
+    // infinite loop of repeated words in a tree.
     if (usedWords[ladder.word] !== undefined) {
       continue;
     }
