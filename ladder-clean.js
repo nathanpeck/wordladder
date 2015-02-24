@@ -61,6 +61,7 @@ function findWordLadder(startWord, endWord, dictionary) {
     new WordLadder(startWord)
   ];
   var usedWords = {};
+  usedWords[startWord] = null; // Ensure the start word is alread used.
 
   while (working.length !== 0) {
     var ladder = working.shift();
